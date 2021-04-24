@@ -1,18 +1,27 @@
 {
   "name": "binance-dca-bot",
   "version": "1.0.0",
-  "description": "A bot to automatically buy cryptocurrency at set intervals",
+  "description": "A bot to automatically DCA (Dollar-Cost Average) buy cryptocurrency on Binance",
   "main": "src/index.js",
   "type": "module",
+  "author": "Luke Liasi (lukeliasi@gmail.com)",
+  "license": "MIT",
   "scripts": {
     "start": "node ./src/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
     "node-schedule": "^2.0.0"
-  }
+  },
+  "keywords": [
+    "crypto",
+    "bitcoin",
+    "ethereum",
+    "cryptocurrency",
+    "dca",
+    "binance",
+    "dollar-cost-averaging",
+    "binance-api"
+  ]
 }

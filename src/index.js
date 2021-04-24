@@ -7,11 +7,14 @@ async function runBot() {
 
   //* Set up CRON to buy the assets at their defined schedules */
   for (const coin of buylist) {
-    const { asset, currency, spend, schedule } = coin;
+    const { asset, currency, quantity, schedule, quoteOrderQty } = coin;
     const pair =  asset + currency;
 
+    if (quantity && quoteOrderQty) {
+      throw new Error(`Error: [${pair}]: You can not have both quantity and quoteOrderQty options at the same time.`);
+    }
 
-    const buyResponse = await api.marketBuy(pair, undefined, spend);
+    const buyResponse = await api.marketBuy(pair, quantity, quoteOrderQty);
     console.log(buyResponse);
   }
 }

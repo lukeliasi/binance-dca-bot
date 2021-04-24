@@ -6,30 +6,20 @@ export class BinanceAPI {
   /**
    * @param {string} key
    * @param {string} secret
-   * @param {object} options
    */
-  constructor(key, secret, options = {}) {
+  constructor(key, secret) {
     this.apiUrl = "https://api.binance.com";
     this.key = key;
     this.secret = secret;
-    this.options = {
-      recvWindow: options.recvWindow || 20000
-    };
   }
 
-  buildParams() {
-    const params = {
-      recvWindow: this.options.recvWindow,
-      timestamp: Date.now(),
-    }
-
-    return querystring.stringify(params);
-  }
-
-  createSignature() {
+  /**
+   * @param {object} params
+   */
+  createSignature(params) {
     return crypto
       .createHmac("sha256", this.secret)
-      .update(this.buildParams())
+      .update(querystring.stringify(params))
       .digest("hex");
   }
 
@@ -39,26 +29,26 @@ export class BinanceAPI {
    * @param {string} quoteOrderQty
    */
   async marketBuy(symbol, quantity, quoteOrderQty) {
-    const signature = this.createSignature();
-
-    let body = {
+    let params = {
       symbol: symbol,
       side: "BUY",
       type: "MARKET",
+      recvWindow: 30000,
+      timestamp: Date.now()
     }
 
-    if (quantity) body.quantity = quantity;
-    if (quoteOrderQty) body.quoteOrderQty = quoteOrderQty;
+    if (quantity) params.quantity = quantity;
+    if (quoteOrderQty) params.quoteOrderQty = quoteOrderQty;
+    params.signature = this.createSignature(params);
 
-    const url = `${this.apiUrl}/api/v3/order?${this.buildParams()}&signature=${signature}`;
+    const url = `${this.apiUrl}/api/v3/order?${querystring.stringify(params)}`;
 
     try {
       const response = await fetch(url, {
         method: "POST",
-        body: JSON.stringify(body),
         headers: {
           "X-MBX-APIKEY": this.key,
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/json"
         }
       });
 
