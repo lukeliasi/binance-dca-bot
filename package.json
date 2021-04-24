@@ -1,12 +1,18 @@
 {
-  "name": "dca-bot",
+  "name": "binance-dca-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A bot to automatically buy cryptocurrency at set intervals",
+  "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-binance-api": "^0.12.5",
+    "node-schedule": "^2.0.0"
+  }
 }
