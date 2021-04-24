@@ -1,16 +1,17 @@
-import { binanceApi } from "./services/binance-connect.js";
+import { BinanceAPI } from "./services/binance-api.js";
 import { config } from "../config.js";
 
 async function runBot() {
+  const api = new BinanceAPI(config.binance.key, config.binance.secret);
   const buylist = config.buy;
-  // return await binanceApi.marketBuy("BTCGBP", 10);
-  // cron.scheduleJob(schedule, async () => await init(token));
 
   //* Set up CRON to buy the assets at their defined schedules */
   for (const coin of buylist) {
     const { asset, currency, spend, schedule } = coin;
     const pair =  asset + currency;
-    const buyResponse = await binanceApi.marketBuy(pair, spend);
+
+
+    const buyResponse = await api.marketBuy(pair, undefined, spend);
     console.log(buyResponse);
   }
 }

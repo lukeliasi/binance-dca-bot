@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "node-binance-api": "^0.12.5",
+    "node-fetch": "^2.6.1",
     "node-schedule": "^2.0.0"
   }
 }
