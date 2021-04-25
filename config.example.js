@@ -11,7 +11,7 @@ const config = {
     {
       asset: "LSK",
       currency: "BTC", // Buy LSK with BTC
-      quantity: 5, // Buy 5 LSK
+      quantity: 5, // Buy 5 LSK, regardless of the price
       schedule: "0 22 * * 1-5"  // Place order on the first day of every month - https://crontab.guru/#0_0_1_*_*
     },
   ]
