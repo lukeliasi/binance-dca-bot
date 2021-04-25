@@ -1,2 +1,2 @@
-# binance-dca-bot
-## WARNING work in progress, do not use!!!
+# Binance DCA (Dollar-Cost-Averaging) Bot
+Documentation coming soon!

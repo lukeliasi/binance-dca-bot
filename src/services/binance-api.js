@@ -1,6 +1,8 @@
 import fetch from "node-fetch";
 import crypto from "crypto";
 import querystring from "querystring";
+import { Log } from "./log.js";
+const log = new Log();
 
 export class BinanceAPI {
   /**
@@ -39,6 +41,7 @@ export class BinanceAPI {
 
     if (quantity) params.quantity = quantity;
     if (quoteOrderQty) params.quoteOrderQty = quoteOrderQty;
+
     params.signature = this.createSignature(params);
 
     const url = `${this.apiUrl}/api/v3/order?${querystring.stringify(params)}`;
@@ -54,7 +57,7 @@ export class BinanceAPI {
 
       return await response.json();
     } catch(error) {
-      console.log(error);
+      log.write(error, "red", "error");
     }
   }
 }
