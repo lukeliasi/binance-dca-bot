@@ -1,8 +1,6 @@
 import fetch from "node-fetch";
 import crypto from "crypto";
 import querystring from "querystring";
-import { Log } from "./log.js";
-const log = new Log();
 
 export class BinanceAPI {
   /**
@@ -57,7 +55,7 @@ export class BinanceAPI {
 
       return await response.json();
     } catch(error) {
-      log.write(error, "red", "error");
+      console.error(error);
     }
   }
 }

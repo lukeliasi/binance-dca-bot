@@ -2,10 +2,8 @@ import { BinanceAPI } from "./services/binance-api.js";
 import { config } from "../config.js";
 import cron from "node-schedule";
 import cronstrue from "cronstrue";
-import { Log } from "./services/log.js";
 import { SendGridNotification } from "./services/sendgrid-notification.js";
 
-const log = new Log();
 const notification = new SendGridNotification(config.sendgrid_secret);
 
 /**
@@ -19,18 +17,18 @@ async function placeOrder(coin) {
 
   if (response.orderId) {
     const successText = `Successfully purchased: ${response.executedQty} ${pair} @ ${response.fills[0].price}. Spend: ${response.cummulativeQuoteQty}.\n ${JSON.stringify(response)}`;
-    log.write(successText, "green");
+    console.log(successText.green);
     await notification.send(config.notifications.to, config.notifications.from, `Buy order executed (${pair})`, successText);
   } else {
     const errorText = response.msg || `Unexpected error placing buy order for ${pair}`;
-    log.write(errorText, "red", "error");
+    console.error(errorText.red);
     await notification.send(config.notifications.to, config.notifications.from, `Buy order failed (${pair})`, errorText);
   }
 }
 
 // Loop through all the assets defined to buy in the config and schedule the cron jobs
 async function runBot() {
-  log.write('Starting Binance DCA Bot', "orange");
+  console.log("Starting Binance DCA Bot".magenta);
 
   for (const coin of config.buy) {
     const { schedule, asset, currency, quantity, quoteOrderQty } = coin;
@@ -40,9 +38,9 @@ async function runBot() {
     }
 
     if (quantity) {
-      log.write(`CRON set up to buy ${quantity} ${asset} with ${currency} ${schedule ? cronstrue.toString(schedule) : "immediately."}`, "yellow");
+      console.log(`CRON set up to buy ${quantity} ${asset} with ${currency} ${schedule ? cronstrue.toString(schedule) : "immediately."}`.yellow);
     } else {
-      log.write(`CRON set up to buy ${quoteOrderQty} ${currency} of ${asset} ${schedule ? cronstrue.toString(schedule) : "immediately."}`, "yellow");
+      console.log(`CRON set up to buy ${quoteOrderQty} ${currency} of ${asset} ${schedule ? cronstrue.toString(schedule) : "immediately."}`.yellow);
     }
 
     // If a schedule is not defined, the asset will be bought immediately

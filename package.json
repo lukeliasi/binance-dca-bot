@@ -4,7 +4,7 @@
   "description": "A bot to automatically DCA (Dollar-Cost Average) buy cryptocurrency on Binance",
   "main": "src/index.js",
   "type": "module",
-  "author": "Luke Liasi (lukeliasi@gmail.com)",
+  "author": "Luke Liasi <lukeliasi@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "node ./src/index.js"

@@ -1,6 +1,4 @@
 import mail from "@sendgrid/mail";
-import { Log } from "./log.js";
-const log = new Log();
 
 export class SendGridNotification {
   /**
@@ -23,7 +21,7 @@ export class SendGridNotification {
     try {
       await mail.send(email);
     } catch(error) {
-      log.write(error, "red", "error");
+      console.error(error);
     }
   }
 }
