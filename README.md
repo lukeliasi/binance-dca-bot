@@ -40,7 +40,7 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 | Parameter                     | Description |
 | -----------                   | ----------- |
 | `asset`                       | The asset you want to buy | 
-| `currency`                    | The currency you want to use to buy the asset |
+| `currency`                    | The currency you want to use to buy the asset. E.g: "USD", "GBP", "BTC" etc... |
 | `quoteOrderQty` or `quantity` | Use `quoteOrderQty` for the amount you want to spend/invest or alternatively you can set `quantity` to buy a set amount of the asset regardless of price. Note [Binance trading rules](https://www.binance.com/en/trade-rule) pairs have minimum and maximum order sizes  |
 | `schedule`                    | A cron expression to set when the buy order should execute for this asset. See [Crontab.guru](https://crontab.guru/) for help setting up schedules. You can omit this `schedule` parameter and the buy order will execute immediately |
 
