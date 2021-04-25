@@ -16,12 +16,15 @@ export class SendGridNotification {
    * @param {string} text
    */
   async send(to, from, subject, text) {
-    const email = { to, from, subject, text };
+    if (this.secret) {
+      const email = { to, from, subject, text };
 
-    try {
-      await mail.send(email);
-    } catch(error) {
-      console.error(error);
+      try {
+        await mail.send(email);
+      } catch(error) {
+        console.log("Failed to send notification email.")
+        console.error(error);
+      }
     }
   }
 }

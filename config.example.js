@@ -1,11 +1,6 @@
 const config = {
   binance_key: "your-binance-api-key",
   binance_secret: "your-binance-api-secret",
-  sendgrid_secret: "your-sendgrid-api-secret",
-  notifications: {
-    to: "john@example.com",
-    from: "noreply@example.com"
-  },
   buy: [
     {
       asset: "BTC", // Asset you want to buy
