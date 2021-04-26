@@ -6,7 +6,9 @@ export class SendGridNotification {
    */
   constructor(secret) {
     this.secret = secret;
-    mail.setApiKey(this.secret);
+    if (this.secret) {
+      mail.setApiKey(this.secret);
+    }
   }
 
   /**
