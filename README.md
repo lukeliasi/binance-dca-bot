@@ -53,5 +53,6 @@ Consider running the bot in the cloud, so you do not need to run the bot constan
 ### Disclaimer
 Use at your own risk. I am not liable for how you use the bot.
 
-
+### License
+[MIT License](http://opensource.org/licenses/MIT)
 
