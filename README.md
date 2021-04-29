@@ -50,6 +50,15 @@ Use this command to start the bot: `npm run start`. The program must stay runnin
 ## Deployment
 Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a Vultr instance, the $5 /month plan is fine to run the bot. You can use my referal link here to receive $100 of credit for free: https://www.vultr.com/?ref=8768322-6G. You will want to use [PM2](https://github.com/Unitech/pm2) process manager on the server which keeps the bot running and can restart the bot automatically if the server or program crashes.
 
+## Donations
+If you found this project helpful and would like to support me, you can donate to one of the following crypto addresses:
+
+* **BTC**: 1LeisHRv4yLyzQg6M79f48ej9cnkruh6WH
+* **ETH**: 0x804d2f31cc49a68011271b1d56884d0efa9e9ce9
+* **DOGE**: DBa2UFwonN4QcunXY8Thev9oCxMkDrr9rm
+* **XRP**: rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh tag: 101391719
+* **USDT**: 0x804d2f31cc49a68011271b1d56884d0efa9e9ce9
+
 ## Disclaimer
 Use at your own risk. I am not liable for how you use the bot.
 
