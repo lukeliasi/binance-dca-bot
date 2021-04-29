@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/lukeliasi/binance-dca-bot.git"
-  }
+  },
   "scripts": {
     "start": "node ./src/index.js"
   },
