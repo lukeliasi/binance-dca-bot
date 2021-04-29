@@ -48,7 +48,7 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 Use this command to start the bot: `npm run start`. The program must stay running, and it will execute the buy orders at the defined schedules using cron jobs.
 
 ## Deployment
-Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a Vultr Cloud Compute instance, the $2.50 /month plan is fine to run the bot (you need to select Atlanta or New York NJ as the location to see the $2.50 plan). You can use my referal link here to receive $100 of credit for free: https://www.vultr.com/?ref=8768322-6G. You will want to use [PM2](https://github.com/Unitech/pm2) process manager on the server which keeps the bot running and can restart the bot automatically if the server or program crashes.
+Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a Vultr Cloud Compute instance, the $2.50 /month plan is fine to run the bot (you need to select Atlanta or New York NJ as the location to see the $2.50 plan). You can use my referal link here to receive $100 of credit for free: https://www.vultr.com/?ref=8768322-6G (over 3 years of hosting for free!). You will want to use [PM2](https://github.com/Unitech/pm2) process manager on the server which keeps the bot running and can restart the bot automatically if the server or program crashes.
 
 ## Donations
 If you found this project helpful and would like to support me, you can donate to one of the following crypto addresses:
