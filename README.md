@@ -47,6 +47,11 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 ## Start the bot
 Use this command to start the bot: `npm run start`. The program must stay running, and it will execute the buy orders at the defined schedules using cron jobs.
 
+## Automating deposits to Binance
+For further automation you can deposit funds into your Binance account automatically via bank transfer. Simply initiate a fiat deposit (bank transfer) via the Binance website and note down the bank details you need to pay to. The reference code and other details never change, so you can set up a standing order with your bank to automatically transfer money to Binance on a schedule with these details.
+
+As an exmaple, you could set up a standing order to deposit to Binance the day after you get paid, and then configure the bot to purchase your crypto the following day.
+
 ## Deployment
 Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a Vultr Cloud Compute instance, the $3.50 /month plan is fine to run the bot (you need to select Atlanta or New York NJ as the location to see the $3.50 plan). You can use my referal link here to receive $100 of credit for free: https://www.vultr.com/?ref=8768322-6G. You will want to use [PM2](https://github.com/Unitech/pm2) process manager on the server which keeps the bot running and can restart the bot automatically if the server or program crashes.
 
