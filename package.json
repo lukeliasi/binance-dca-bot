@@ -6,6 +6,10 @@
   "type": "module",
   "author": "Luke Liasi <lukeliasi@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukeliasi/binance-dca-bot.git"
+  },
   "scripts": {
     "start": "node ./src/index.js"
   },
