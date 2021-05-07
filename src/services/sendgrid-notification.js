@@ -24,7 +24,7 @@ export class SendGridNotification {
       try {
         await mail.send(email);
       } catch(error) {
-        console.log("Failed to send notification email.")
+        console.log("Failed to send notification email.");
         console.error(error);
       }
     }
