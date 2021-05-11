@@ -8,7 +8,7 @@ This bot allows you to sit back and relax while it automatically invests in cryp
 
 ## Getting Started
 ### Create a Binance Account
-Sign up to Binance if you do not already have an account and complete any verification that may be required. You can use my sign-up referral link here if you wish: https://www.binance.com/en/register?ref=W3V44WHT. By using this link you earn a small amount of BTC commission on any trades I make.
+Sign up to [Binance](https://www.binance.com/en/register?ref=W3V44WHT) if you do not already have an account and complete any verification that may be required. You can use my sign-up referral link here if you wish: https://www.binance.com/en/register?ref=W3V44WHT. By using this link you earn a small amount of BTC commission on any trades I make.
 
 ### Generate API keys
 [Create a new API key on Binance](https://www.binance.com/en/support/faq/360002502072). You should select **Enable Reading** and **Enable Spot & Margin Trading** for the restrictions.
@@ -48,7 +48,11 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 Use this command to start the bot: `npm run start`. The program must stay running, and it will execute the buy orders at the defined schedules using cron jobs.
 
 ## Deployment
-Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a Vultr Cloud Compute VPS instance as the cheapest option. You can use my referal link here to receive $100 of credit for free: https://www.vultr.com/?ref=8768322-6G. You will want to use [PM2](https://github.com/Unitech/pm2) process manager on the server which keeps the bot running and can restart the bot automatically if the server or program crashes. Remember the remote server may be in a different timezone to you, run the command `date` to see the servers timezone to configure your cron accordingly. 
+Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a [Vultr](https://www.vultr.com/?ref=8768322-6G) Cloud Compute VPS instance as the cheapest option. You can use my referal link here to receive $100 of credit for free: https://www.vultr.com/?ref=8768322-6G after you sign up.
+
+You will want to use [PM2](https://github.com/Unitech/pm2) process manager or similar on the server which keeps the bot running and can restart the bot automatically if the server or program crashes.
+
+Remember the remote server may be in a different timezone to you, run the command `date` to see the servers timezone to configure your cron accordingly. 
 
 ## Automating fiat deposits to Binance
 For further automation you can deposit funds into your Binance account automatically via bank transfer. Simply initiate a fiat deposit (bank transfer) via the Binance website and note down the bank details you need to pay to. The reference code and other details never change, so you can set up a standing order with your bank to automatically transfer money to Binance on a schedule with these details.
