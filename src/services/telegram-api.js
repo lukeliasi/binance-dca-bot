@@ -17,6 +17,10 @@ export class TelegramAPI {
 	 * @param {string} message
 	 */
 	async sendMessage(message) {
+		if (!this.token) {
+			return;
+		}
+
 		let params = {
 			chat_id: this.chatId,
 			text: message,

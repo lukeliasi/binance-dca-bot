@@ -37,8 +37,8 @@ const telegram = new TelegramAPI(TELEGRAM_TOKEN, TELEGRAM_CHAT_ID);
  * SendGrid Integration
  */
 const SENDGRID_SECRET = process.env.SENDGRID_SECRET || config.sendgrid_secret;
-const SENDGRID_FROM = process.env.SENDGRID_FROM || config.notifications.from;
-const SENDGRID_TO = process.env.SENDGRID_TO || config.notifications.to;
+const SENDGRID_TO = process.env.SENDGRID_TO || config.notifications?.to;
+const SENDGRID_FROM = process.env.SENDGRID_FROM || config.notifications?.from;
 const sendGrid = new SendGridNotification(SENDGRID_SECRET, SENDGRID_TO, SENDGRID_FROM);
 
 /**
@@ -71,7 +71,7 @@ async function placeOrder(coin) {
 		console.error(colors.red(errorText));
 
 		await sendGrid.send(`Buy order failed(${pair})`, errorText);
-		await telegram.sendMessage(`❌ * Buy order failed (${pair}) *\n\n` +
+		await telegram.sendMessage(`❌ *Buy order failed (${pair})*\n\n` +
 			'```' +
 			`${errorText}` +
 			'```');
@@ -103,6 +103,12 @@ async function runBot() {
 			cron.scheduleJob(schedule, async () => await placeOrder(coin));
 		}
 	}
+
+	await telegram.sendMessage('🏁 *Binance DCA Bot Started*\n\n' +
+		`_Date:_ ${new Date().toLocaleString()}\n\n` +
+		'```\n' +
+		config.buy.map(c => `${c.quoteOrderQty} ${c.asset} with ${c.currency} ${c.schedule ? cronstrue.toString(c.schedule) : "immediately."}`).join('\n') +
+		'```');
 }
 
 await runBot();
