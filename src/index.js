@@ -78,6 +78,20 @@ async function placeOrder(coin) {
 	}
 }
 
+/**
+ * @param {object} buy
+ */
+function getBuyDetails(buy) {
+	return config.buy.map(c => {
+		if (c.quantity) {
+			return `${c.quantity} ${c.asset} with ${c.currency} ${c.schedule ? cronstrue.toString(c.schedule) : "immediately."}`
+		}
+		else {
+			return `${c.quoteOrderQty} ${c.currency} of ${c.asset} ${c.schedule ? cronstrue.toString(c.schedule) : "immediately."}`
+		}
+	}).join('\n');
+}
+
 // Loop through all the assets defined to buy in the config and schedule the cron jobs
 async function runBot() {
 	console.log(colors.magenta("Starting Binance DCA Bot"), colors.grey(`[${new Date().toLocaleString()}]`));
@@ -107,7 +121,7 @@ async function runBot() {
 	await telegram.sendMessage('🏁 *Binance DCA Bot Started*\n\n' +
 		`_Date:_ ${new Date().toLocaleString()}\n\n` +
 		'```\n' +
-		config.buy.map(c => `${c.quoteOrderQty} ${c.asset} with ${c.currency} ${c.schedule ? cronstrue.toString(c.schedule) : "immediately."}`).join('\n') +
+		getBuyDetails(config.buy) +
 		'```');
 }
 
