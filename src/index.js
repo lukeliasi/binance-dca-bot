@@ -23,6 +23,7 @@ server.listen(PORT);
 /**
  * Binance Integration
  */
+const BUY_ASSETS = process.env.BUY_ASSETS || config.buy;
 const BINANCE_KEY = process.env.BINANCE_KEY || config.binance_key;
 const BINANCE_SECRET = process.env.BINANCE_SECRET || config.binance_secret;
 const binance = new BinanceAPI(BINANCE_KEY, BINANCE_SECRET);
@@ -91,7 +92,7 @@ async function placeOrder(coin) {
  * @param {object} buy
  */
 function getBuyDetails(buy) {
-	return config.buy.map(c => {
+	return BUY_ASSETS.map(c => {
 		if (c.quantity) {
 			return `${c.quantity} ${c.asset} with ${c.currency} ${c.schedule ? cronstrue.toString(c.schedule) : "immediately."}`
 		}
@@ -105,7 +106,7 @@ function getBuyDetails(buy) {
 async function runBot() {
 	console.log(colors.magenta("Starting Binance DCA Bot"), colors.grey(`[${new Date().toLocaleString()}]`));
 
-	for (const coin of config.buy) {
+	for (const coin of BUY_ASSETS) {
 		const { schedule, asset, currency, quantity, quoteOrderQty } = coin;
 
 		if (quantity && quoteOrderQty) {
@@ -130,7 +131,7 @@ async function runBot() {
 	await telegram.sendMessage('🏁 *Binance DCA Bot Started*\n\n' +
 		`_Date:_ ${new Date().toLocaleString()}\n\n` +
 		'```\n' +
-		getBuyDetails(config.buy) +
+		getBuyDetails(BUY_ASSETS) +
 		'```');
 }
 
