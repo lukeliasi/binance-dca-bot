@@ -24,7 +24,7 @@ server.listen(PORT);
 /**
  * Binance Integration
  */
-const BUY_ASSETS = process.env.BUY_ASSETS || config.buy || [];
+const BUY_ASSETS = JSON.parse(process.env.BUY_ASSETS) || config.buy || [];
 const BINANCE_KEY = process.env.BINANCE_KEY || config.binance_key;
 const BINANCE_SECRET = process.env.BINANCE_SECRET || config.binance_secret;
 const binance = new BinanceAPI(BINANCE_KEY, BINANCE_SECRET);
