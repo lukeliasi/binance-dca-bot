@@ -24,7 +24,7 @@ server.listen(PORT);
 /**
  * Binance Integration
  */
-const BUY_ASSETS = JSON.parse(process.env.BUY_ASSETS) || config.buy || [];
+const BUY_ASSETS = JSON.parse(process.env.BUY_ASSETS || null) || config.buy || [];
 const BINANCE_KEY = process.env.BINANCE_KEY || config.binance_key;
 const BINANCE_SECRET = process.env.BINANCE_SECRET || config.binance_secret;
 const binance = new BinanceAPI(BINANCE_KEY, BINANCE_SECRET);
@@ -135,7 +135,7 @@ async function runBot() {
 	for (const coin of BUY_ASSETS) {
 		const { schedule, asset, currency, quantity, quoteOrderQty } = coin;
 
-		if (!quantity || !asset || !currency) {
+		if ((!quantity && !quoteOrderQty) || !asset || !currency) {
 			console.log(colors.red("Invalid coin settings, skip this coin, please check environment variables or config.js"));
 			continue;
 		}
