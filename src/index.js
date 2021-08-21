@@ -8,6 +8,7 @@ import { SendGridNotification } from "./services/sendgrid-notification.js";
 import { TelegramAPI } from "./services/telegram-api.js"
 import { MongoDb } from "./services/mongodb.js";
 
+
 /**
  * Simple HTTP server (so Heroku and other free SaaS will not bother on killing the app on free plans)
  * Can always use something like Kaffeine to keep it alive
@@ -23,7 +24,7 @@ server.listen(PORT);
 /**
  * Binance Integration
  */
-const BUY_ASSETS = process.env.BUY_ASSETS || config.buy;
+const BUY_ASSETS = process.env.BUY_ASSETS || config.buy || [];
 const BINANCE_KEY = process.env.BINANCE_KEY || config.binance_key;
 const BINANCE_SECRET = process.env.BINANCE_SECRET || config.binance_secret;
 const binance = new BinanceAPI(BINANCE_KEY, BINANCE_SECRET);
@@ -50,6 +51,7 @@ const MONGODB_URI = process.env.MONGODB_URI || config.mongodb_uri;
 const mongoDb = new MongoDb(MONGODB_URI);
 
 /**
+ * Actually place the order
  * @param {object} coin
  */
 async function placeOrder(coin) {
@@ -89,6 +91,7 @@ async function placeOrder(coin) {
 }
 
 /**
+ * Get human-readable details on the buy to perform
  * @param {object} buy
  */
 function getBuyDetails(buy) {
@@ -102,9 +105,33 @@ function getBuyDetails(buy) {
 	}).join('\n');
 }
 
-// Loop through all the assets defined to buy in the config and schedule the cron jobs
+/**
+ * Check if .env variables or config parameters are valids
+ */
+function checkForParameters() {
+
+	if (!BINANCE_KEY || !BINANCE_SECRET) {
+		console.log(colors.red("No Binance API key, please update environment variables or config.js"));
+		return false;
+	}
+
+	if (!BUY_ASSETS || BUY_ASSETS.length == 0) {
+		console.log(colors.red("No coin to buy, please update environment variables or config.js"));
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Loop through all the assets defined to buy in the config and schedule the cron jobs
+ */
 async function runBot() {
 	console.log(colors.magenta("Starting Binance DCA Bot"), colors.grey(`[${new Date().toLocaleString()}]`));
+
+	if (!checkForParameters()) {
+		return;
+	}
 
 	for (const coin of BUY_ASSETS) {
 		const { schedule, asset, currency, quantity, quoteOrderQty } = coin;

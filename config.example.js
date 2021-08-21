@@ -1,6 +1,14 @@
 const config = {
   binance_key: "your-binance-api-key",
   binance_secret: "your-binance-api-secret",
+  sendgrid_secret: "your-sendgrid-api-secret",
+  notifications: {
+    to: "example@example.com",
+    from: "noreply@example.com"
+  },
+  telegram_token: "your-telegram-bot-token",
+  telegram_chat_id: "your-telegram-chat-id",
+  mongodb_uri: "your-mongodb-atlas-uri",
   buy: [
     {
       asset: "BTC", // Asset you want to buy
