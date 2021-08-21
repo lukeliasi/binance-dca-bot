@@ -109,7 +109,6 @@ function getBuyDetails(buy) {
  * Check if .env variables or config parameters are valids
  */
 function checkForParameters() {
-
 	if (!BINANCE_KEY || !BINANCE_SECRET) {
 		console.log(colors.red("No Binance API key, please update environment variables or config.js"));
 		return false;
@@ -134,6 +133,11 @@ async function runBot() {
 	}
 
 	for (const coin of BUY_ASSETS) {
+		if (!quantity || !asset || !currency) {
+			console.log(colors.red("Invalid coin settings, skip this coin, please check environment variables or config.js"));
+			continue;
+		}
+
 		const { schedule, asset, currency, quantity, quoteOrderQty } = coin;
 
 		if (quantity && quoteOrderQty) {
