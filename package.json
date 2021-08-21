@@ -17,6 +17,7 @@
     "@sendgrid/mail": "^7.4.2",
     "colors": "^1.4.0",
     "cronstrue": "^1.112.0",
+    "mongodb": "^4.1.0",
     "node-fetch": "^2.6.1",
     "node-schedule": "^2.0.0"
   },

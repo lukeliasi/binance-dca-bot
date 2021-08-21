@@ -1,11 +1,12 @@
-import { BinanceAPI } from "./services/binance-api.js";
-import { config } from "../config.js";
 import cron from "node-schedule";
 import cronstrue from "cronstrue";
-import { SendGridNotification } from "./services/sendgrid-notification.js";
 import colors from "colors";
-import { TelegramAPI } from "./services/telegram-api.js"
 import http from "http";
+import { config } from "../config.js";
+import { BinanceAPI } from "./services/binance-api.js";
+import { SendGridNotification } from "./services/sendgrid-notification.js";
+import { TelegramAPI } from "./services/telegram-api.js"
+import { MongoDb } from "./services/mongodb.js";
 
 /**
  * Simple HTTP server (so Heroku and other free SaaS will not bother on killing the app on free plans)
@@ -42,6 +43,12 @@ const SENDGRID_FROM = process.env.SENDGRID_FROM || config.notifications?.from;
 const sendGrid = new SendGridNotification(SENDGRID_SECRET, SENDGRID_TO, SENDGRID_FROM);
 
 /**
+ * MongoDb Integration
+ */
+const MONGODB_URI = process.env.MONGODB_URI || config.mongodb_uri;
+const mongoDb = new MongoDb(MONGODB_URI);
+
+/**
  * @param {object} coin
  */
 async function placeOrder(coin) {
@@ -54,6 +61,8 @@ async function placeOrder(coin) {
 		const data = `${JSON.stringify(response)}\n`;
 
 		console.log(colors.green(successText), colors.grey(data));
+
+		await mongoDb.saveOrder(order);
 
 		await sendGrid.send(`Buy order executed (${pair})`, successText + data);
 

@@ -54,6 +54,7 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 | `notifications`    | If using SendGrid notifications this value should be an object structured like so: `notifications: { to: "example@example.com", from: "noreply@example.com" }` |
 | `telegram_token`   | If using Telegram notifications this value is the BotFather's generated token                                                                                  |
 | `telegram_chat_id` | If using Telegram notifications this value is the chat identifier to which send notification                                                                   |
+| `mongodb_uri`      | MongoDb Atlas connection string                                                                                                                                |
 | `buy`              | Array of objects for each buy you want to set up.                                                                                                              |
 
 #### .env
@@ -67,6 +68,7 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 | `SENDGRID_FROM`    | If using SendGrid notifications this value is used as origin email address                            |
 | `TELEGRAM_TOKEN`   | If using Telegram notifications this value is the BotFather's generated token                         |
 | `TELEGRAM_CHAT_ID` | If using Telegram notifications this value is the chat identifier to which send notification          |
+| `MONGODB_URI`      | MongoDb Atlas connection string                                                                       |
 
 #### Buy object
 
