@@ -69,12 +69,12 @@ export class BinanceAPI {
 			currency,
 			orderId: order.orderId,
 			transactionDateTime: new Date(order.transactTime).toLocaleString("en-US"),
-			quantity: Math.round(order.executedQty),
+			quantity: parseFloat(order.executedQty),
 			totalCost: order.fills.reduce((total, f) => (f.price * f.qty) + total, 0),
 			averageAssetValue: order.fills.reduce((total, f) => (f.price * f.qty) + total, 0) / order.executedQty,
 			commissions: order.fills.reduce((total, obj) => (obj.commission * 1.0) + total, 0),
 			commissionAsset: order.fills[0].commissionAsset,
-			fills: order.fills.map(({ price, qty, commission, commissionAsset }) => `💰 ${Math.round(qty)} ${asset} x ${Math.round(price)} ${currency} (fee: ${Math.round(commission)} ${commissionAsset})`)
+			fills: order.fills.map(({ price, qty, commission, commissionAsset }) => `💰 ${parseFloat(qty)} ${asset} x ${parseFloat(price)} ${currency} (fee: ${parseFloat(commission)} ${commissionAsset})`)
 		}
 	}
 }
