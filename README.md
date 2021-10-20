@@ -83,7 +83,12 @@ Use this command to start the bot: `npm run start`. The program must stay runnin
 
 ## Deployment
 
-Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a [Vultr](https://www.vultr.com/?ref=8768322-6G) Cloud Compute VPS instance as the cheapest option. You can use my referal link here to receive $100 of credit for free: <https://www.vultr.com/?ref=8768322-6G> after you sign up.
+Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. 
+
+Some options:
+- [Vultr](https://www.vultr.com/?ref=8944587-8H) - $100 free credit using link
+- [Digital Ocean](https://m.do.co/c/4f3661af7d87) - $100 free credit using link
+- [Linode](https://www.linode.com/)
 
 You will want to use [PM2](https://github.com/Unitech/pm2) process manager or similar on the server which keeps the bot running and can restart the bot automatically if the server or program crashes.
 
