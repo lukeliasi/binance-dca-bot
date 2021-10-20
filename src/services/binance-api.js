@@ -12,6 +12,9 @@ export class BinanceAPI {
 		// this.apiUrl = "https://testnet.binance.vision";
 		this.key = key;
 		this.secret = secret;
+
+		if (!this.key) throw new Error("No Binance API Key found in .env");
+		if (!this.secret) throw new Error("No Binance API Secret found in .env");
 	}
 
 	/**
@@ -22,6 +25,31 @@ export class BinanceAPI {
 			.createHmac("sha256", this.secret)
 			.update(querystring.stringify(params))
 			.digest("hex");
+	}
+
+	async accountInfo() {
+		let params = {
+			recvWindow: 30000,
+			timestamp: Date.now(),
+		}
+
+		params.signature = this.createSignature(params);
+
+		const url = `${this.apiUrl}/api/v3/account?${querystring.stringify(params)}`;
+
+		try {
+			const response = await fetch(url, {
+				method: "GET",
+				headers: {
+					"X-MBX-APIKEY": this.key,
+					"Content-Type": "application/json"
+				}
+			});
+
+			return await response.json();
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	/**

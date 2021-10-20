@@ -92,9 +92,18 @@ function getBuyDetails(buy) {
 	}).join('\n');
 }
 
+async function connectivityCheck() {
+	const accountInfoRes = await binance.accountInfo();
+	if (accountInfoRes.msg) {
+		console.error(accountInfoRes);
+		throw new Error(accountInfoRes.msg);
+	}
+}
+
 // Loop through all the assets defined to buy in the config and schedule the cron jobs
 async function runBot() {
 	console.log(colors.magenta("Starting Binance DCA Bot"), colors.grey(`[${new Date().toLocaleString()}]`));
+	await connectivityCheck()
 
 	for (const coin of config.buy) {
 		const { schedule, asset, currency, quantity, quoteOrderQty } = coin;
