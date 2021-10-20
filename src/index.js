@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { BinanceAPI } from "./services/binance-api.js";
 import { config } from "../config.js";
 import cron from "node-schedule";
@@ -103,7 +106,14 @@ async function connectivityCheck() {
 // Loop through all the assets defined to buy in the config and schedule the cron jobs
 async function runBot() {
 	console.log(colors.magenta("Starting Binance DCA Bot"), colors.grey(`[${new Date().toLocaleString()}]`));
-	await connectivityCheck()
+
+	await telegram.sendMessage('🏁 *Binance DCA Bot Started*\n\n' +
+		`_Date:_ ${new Date().toLocaleString()}\n\n` +
+		'```\n' +
+		getBuyDetails(config.buy) +
+		'```');
+
+	await connectivityCheck();
 
 	for (const coin of config.buy) {
 		const { schedule, asset, currency, quantity, quoteOrderQty } = coin;
@@ -126,12 +136,6 @@ async function runBot() {
 			cron.scheduleJob(schedule, async () => await placeOrder(coin));
 		}
 	}
-
-	await telegram.sendMessage('🏁 *Binance DCA Bot Started*\n\n' +
-		`_Date:_ ${new Date().toLocaleString()}\n\n` +
-		'```\n' +
-		getBuyDetails(config.buy) +
-		'```');
 }
 
 await runBot();
