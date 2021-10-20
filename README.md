@@ -6,17 +6,28 @@ This bot allows you to sit back and relax while it automatically invests in cryp
 
 ![Binance DCA Bot Demo](/demo.gif)
 
-## Getting Started
+## Contents
+- [Setup](#setup)
+  - [Generate API keys](#generate-api-keys)
+  - [Create the project](#create-the-project)
+- [Configure the bot](#configure-the-bot)
+  - [config.js file](#configjs)
+  - [Configuration options](#configuration-options)
+- [Running the bot](#running-the-bot)
+- [Deployment](#deployment)
+- [Automating fiat deposits to Binance](#automating-fiat-deposits-to-binance)
+- [Donations](#donations)
+- [TODO list](#todo-list)
+- [Disclaimer](#disclaimer)
+- [License](#license)
 
-### Create a Binance Account
-
-Sign up to [Binance](https://www.binance.com/en/register?ref=W3V44WHT) if you do not already have an account and complete any verification that may be required. You can use my sign-up referral link here if you wish: <https://www.binance.com/en/register?ref=W3V44WHT>. By using this link you earn a small amount of BTC commission on any trades I make.
+## Setup
 
 ### Generate API keys
 
 [Create a new API key on Binance](https://www.binance.com/en/support/faq/360002502072). You should select **Enable Reading** and **Enable Spot & Margin Trading** for the restrictions.
 
-## Set up the project
+### Create the project
 
 [Node.js](https://nodejs.org) v13 or higher required.
 
@@ -32,7 +43,7 @@ API keys can be configured both on the `config.js` and in the `environment varia
 
 Asset pairs **must** be configured only in the `config.js` file.
 
-### Config.js
+### Config.js file
 
 Create a `config.js` file in the root, you can copy the example template:
 
@@ -40,7 +51,7 @@ Create a `config.js` file in the root, you can copy the example template:
 
 Fill out each part of the config.js adding your Binance API keys and set up the buys.
 
-### Configuration Options
+### Configuration options
 
 **NB:** environment variable have priority over config.js values
 
@@ -77,7 +88,7 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 | `quoteOrderQty` or `quantity` | Use `quoteOrderQty` for the amount you want to spend/invest or alternatively you can set `quantity` to buy a set amount of the asset regardless of price. Note [Binance trading rules](https://www.binance.com/en/trade-rule) pairs have minimum and maximum order sizes |
 | `schedule`                    | A cron expression to set when the buy order should execute for this asset. See [Crontab.guru](https://crontab.guru/) for help setting up schedules. You can omit this `schedule` parameter and the buy order will execute immediately                                    |
 
-## Start the bot
+## Running the bot
 
 Use this command to start the bot: `npm run start`. The program must stay running, and it will execute the buy orders at the defined schedules using cron jobs.
 
@@ -110,7 +121,7 @@ If you found this project helpful and would like to support me, you can donate t
 * **XRP**: rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh tag: 101391719
 * **USDT**: 0x804d2f31cc49a68011271b1d56884d0efa9e9ce9
 
-## TODO
+## TODO list
 - [ ] Write tests
 
 ## Disclaimer
