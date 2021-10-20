@@ -105,6 +105,9 @@ If you found this project helpful and would like to support me, you can donate t
 * **XRP**: rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh tag: 101391719
 * **USDT**: 0x804d2f31cc49a68011271b1d56884d0efa9e9ce9
 
+## TODO
+- [ ] Write tests
+
 ## Disclaimer
 
 Use at your own risk. I am not liable for how you use the bot.
