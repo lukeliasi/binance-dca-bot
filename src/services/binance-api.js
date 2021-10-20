@@ -61,6 +61,8 @@ export class BinanceAPI {
 	}
 
 	/**
+	 * @param asset
+	 * @param currency
 	 * @param {object} order
 	 */
 	getOrderDetails(asset, currency, order) {

@@ -57,7 +57,7 @@ async function placeOrder(coin) {
 
 		await sendGrid.send(`Buy order executed (${pair})`, successText + data);
 
-		const details = binance.getOrderDetails("BTC", "EUR", response);
+		const details = binance.getOrderDetails(asset, currency, response);
 		await telegram.sendMessage(`✅ *Buy order executed (${pair})*\n\n` +
 			`_Order ID:_ ${details.orderId}\n` +
 			`_Date:_ ${details.transactionDateTime}\n` +
