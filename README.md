@@ -81,6 +81,20 @@ Fill out each part of the config.js adding your Binance API keys and set up the 
 
 Use this command to start the bot: `npm run start`. The program must stay running, and it will execute the buy orders at the defined schedules using cron jobs.
 
+### Alternative: Using Docker
+
+You can also build a **Docker** image of the bot and run it without having to install NodeJs. To do that, and assuming [Docker](https://docs.docker.com/get-docker/) is installed, first build the image:
+
+```
+docker build -t binance-dca-bot .
+```
+
+then you can execute it with:
+
+```
+docker run -v $PWD/config.js:/app/config.js binance-dca-bot
+```
+
 ## Deployment
 
 Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine. I personally recommend and use a [Vultr](https://www.vultr.com/?ref=8768322-6G) Cloud Compute VPS instance as the cheapest option. You can use my referal link here to receive $100 of credit for free: <https://www.vultr.com/?ref=8768322-6G> after you sign up.
