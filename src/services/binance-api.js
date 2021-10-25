@@ -8,13 +8,16 @@ export class BinanceAPI {
 	 * @param {string} secret
 	 */
 	constructor(key, secret) {
-		this.apiUrl = "https://api.binance.com";
-		// this.apiUrl = "https://testnet.binance.vision";
+		this.apiUrl = "https://api.binance.com/api/v3";
 		this.key = key;
 		this.secret = secret;
+
+		if (!this.key) throw new Error("No Binance API Key found in .env");
+		if (!this.secret) throw new Error("No Binance API Secret found in .env");
 	}
 
 	/**
+	 * Create signature for the payload
 	 * @param {object} params
 	 */
 	createSignature(params) {
@@ -25,6 +28,36 @@ export class BinanceAPI {
 	}
 
 	/**
+	 * Get account information
+	 * @returns {object} account information
+	 */
+	async getAccountInfo() {
+		let params = {
+			recvWindow: 30000,
+			timestamp: Date.now(),
+		}
+
+		params.signature = this.createSignature(params);
+
+		const url = `${this.apiUrl}/account?${querystring.stringify(params)}`;
+
+		try {
+			const response = await fetch(url, {
+				method: "GET",
+				headers: {
+					"X-MBX-APIKEY": this.key,
+					"Content-Type": "application/json"
+				}
+			});
+
+			return await response.json();
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	/**
+	 * Create a market buy order
 	 * @param {string} symbol
 	 * @param {string} quantity
 	 * @param {string} quoteOrderQty
@@ -43,7 +76,7 @@ export class BinanceAPI {
 
 		params.signature = this.createSignature(params);
 
-		const url = `${this.apiUrl}/api/v3/order?${querystring.stringify(params)}`;
+		const url = `${this.apiUrl}/order?${querystring.stringify(params)}`;
 
 		try {
 			const response = await fetch(url, {
@@ -61,6 +94,9 @@ export class BinanceAPI {
 	}
 
 	/**
+	 * Get order details
+	 * @param asset
+	 * @param currency
 	 * @param {object} order
 	 */
 	getOrderDetails(asset, currency, order) {
@@ -69,12 +105,12 @@ export class BinanceAPI {
 			currency,
 			orderId: order.orderId,
 			transactionDateTime: new Date(order.transactTime).toLocaleString("en-US"),
-			quantity: Math.round(order.executedQty),
+			quantity: parseFloat(order.executedQty),
 			totalCost: order.fills.reduce((total, f) => (f.price * f.qty) + total, 0),
 			averageAssetValue: order.fills.reduce((total, f) => (f.price * f.qty) + total, 0) / order.executedQty,
 			commissions: order.fills.reduce((total, obj) => (obj.commission * 1.0) + total, 0),
 			commissionAsset: order.fills[0].commissionAsset,
-			fills: order.fills.map(({ price, qty, commission, commissionAsset }) => `💰 ${Math.round(qty)} ${asset} x ${Math.round(price)} ${currency} (fee: ${Math.round(commission)} ${commissionAsset})`)
+			fills: order.fills.map(({ price, qty, commission, commissionAsset }) => `💰 ${parseFloat(qty)} ${asset} x ${parseFloat(price)} ${currency} (fee: ${parseFloat(commission)} ${commissionAsset})`)
 		}
 	}
 }

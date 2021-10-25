@@ -1,6 +1,6 @@
 {
   "name": "binance-dca-bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A bot to automatically DCA (Dollar-Cost Average) buy cryptocurrency on Binance",
   "main": "src/index.js",
   "type": "module",
@@ -17,6 +17,8 @@
     "@sendgrid/mail": "^7.4.2",
     "colors": "^1.4.0",
     "cronstrue": "^1.112.0",
+    "dotenv": "^10.0.0",
+    "mongodb": "^4.1.3",
     "node-fetch": "^2.6.1",
     "node-schedule": "^2.0.0"
   },
