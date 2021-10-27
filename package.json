@@ -2,7 +2,7 @@
   "name": "binance-dca-bot",
   "version": "2.0.0",
   "description": "A bot to automatically DCA (Dollar-Cost Average) buy cryptocurrency on Binance",
-  "main": "src/index.js",
+  "main": "src/bot.js",
   "type": "module",
   "author": "Luke Liasi <lukeliasi@gmail.com>",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "url": "https://github.com/lukeliasi/binance-dca-bot.git"
   },
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "node src/bot.js"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",

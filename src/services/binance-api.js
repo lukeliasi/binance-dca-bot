@@ -4,13 +4,16 @@ import querystring from "querystring";
 
 export class BinanceAPI {
 	/**
+	 * @param {boolean} testnet
 	 * @param {string} key
 	 * @param {string} secret
 	 */
-	constructor(key, secret) {
-		this.apiUrl = "https://api.binance.com/api/v3";
+	constructor(testnet, key, secret) {
 		this.key = key;
 		this.secret = secret;
+		this.testnet = testnet;
+
+		this.apiUrl = this.testnet ? "https://testnet.binance.vision" : "https://api.binance.com";
 
 		if (!this.key) throw new Error("No Binance API Key found in .env");
 		if (!this.secret) throw new Error("No Binance API Secret found in .env");
@@ -39,7 +42,7 @@ export class BinanceAPI {
 
 		params.signature = this.createSignature(params);
 
-		const url = `${this.apiUrl}/account?${querystring.stringify(params)}`;
+		const url = `${this.apiUrl}/api/v3/account?${querystring.stringify(params)}`;
 
 		try {
 			const response = await fetch(url, {
@@ -76,7 +79,7 @@ export class BinanceAPI {
 
 		params.signature = this.createSignature(params);
 
-		const url = `${this.apiUrl}/order?${querystring.stringify(params)}`;
+		const url = `${this.apiUrl}/api/v3/order?${querystring.stringify(params)}`;
 
 		try {
 			const response = await fetch(url, {

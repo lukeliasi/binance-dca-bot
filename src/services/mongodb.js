@@ -1,4 +1,5 @@
 import mongodb from 'mongodb';
+import colors from "colors";
 const { MongoClient } = mongodb;
 
 export class MongoDb {
@@ -24,6 +25,7 @@ export class MongoDb {
 
 		try {
 			await this.client.connect();
+			console.log(colors.magenta("Successfully connected to MongoDB database."));
 			await this.client.db("binance_dca").collection("orders").insertOne(order);
 		} catch (e) {
 			console.error(e);

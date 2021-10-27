@@ -23,9 +23,9 @@ All other settings (API/Telegram/SendGrid/MongoDB/...) needs to be set using Env
     - [Generate API keys](#generate-api-keys)
     - [Create the project](#create-the-project)
   - [Configure the bot](#configure-the-bot)
-    - [Environment Variables (.env)](#environment-variables-env)
     - [Trades.js file](#tradesjs-file)
       - [Trades object](#trades-object)
+    - [Environment Variables (.env)](#environment-variables-env)
   - [Running the bot](#running-the-bot)
   - [Deployment](#deployment)
   - [Automating fiat deposits to Binance](#automating-fiat-deposits-to-binance)
@@ -53,31 +53,13 @@ npm install
 ## Configure the bot
 
 All the required settings needs to be set using Environment Variables or `.env` file.
-Rename the `example.env` to `.env` file for a quick bootstrap.
-
-**NB:** `TRADES` environment variable have priority over the `trades.js` file values.
-
-### Environment Variables (.env)
-
-These are all the supported settings:
-
-| Name             | Description                                                                                  |           Required            |
-| ---------------- | -------------------------------------------------------------------------------------------- | :---------------------------: |
-| BINANCE_KEY      | Your Binance API Key                                                                         |              YES              |
-| BINANCE_SECRET   | Your Binance API Secret                                                                      |              YES              |
-| SENDGRID_SECRET  | SendGrid API key for the bot to send you email notifications when buy orders are executed    |              NO               |
-| SENDGRID_FROM    | If using SendGrid notifications this is the sender email address                             |              NO               |
-| SENDGRID_TO      | If using SendGrid notifications this is the recipient email address                          |              NO               |
-| TELEGRAM_TOKEN   | If using Telegram notifications this value is the BotFather's generated token                |              NO               |
-| TELEGRAM_CHAT_ID | If using Telegram notifications this value is the chat identifier to which send notification |              NO               |
-| MONGODB_URI      | If using MongoDb Atlas this is the connection string                                         |              NO               |
-| TRADES           | This is the stringified version of the `trades.js` file content                              | ONLY IF NOT USING `trades.js` |
+Rename the `env.example` to `.env` file for a quick bootstrap.
 
 ### Trades.js file
 
-Configure the `trade.js` file in the root, you can uncomment and edit the provided example file.
+Configure the `trades.js` file in the root, you can uncomment and edit the provided example file.
 
-**NB:** you are not actually required to use this file, all the information can be set also in the Environment Variables. It is a quick and easy solution if you want to save/commit these information in order to not loose any **non-sensitive** data.
+**NB:** you may also define trades as an Environment Variables (see below)
 
 #### Trades object
 
@@ -87,6 +69,26 @@ Configure the `trade.js` file in the root, you can uncomment and edit the provid
 | `currency`                    | The currency you want to use to buy the asset. E.g: "USD", "GBP", "BTC" etc...                                                                                                                                                                                           |
 | `quoteOrderQty` or `quantity` | Use `quoteOrderQty` for the amount you want to spend/invest or alternatively you can set `quantity` to buy a set amount of the asset regardless of price. Note [Binance trading rules](https://www.binance.com/en/trade-rule) pairs have minimum and maximum order sizes |
 | `schedule`                    | A cron expression to set when the buy order should execute for this asset. See [Crontab.guru](https://crontab.guru/) for help setting up schedules. You can omit this `schedule` parameter and the buy order will execute immediately                                    |
+
+
+### Environment Variables (.env)
+
+**NB:** `TRADES` environment variable has priority over the `trades.js` file values.
+
+These are all the supported settings:
+
+| Name             | Description                                                                                  |           Required            |
+| ---------------- | -------------------------------------------------------------------------------------------- | :---------------------------: |
+| BINANCE_KEY      | Your Binance API Key                                                                         |              YES              |
+| BINANCE_SECRET   | Your Binance API Secret                                                                      |              YES              |
+| BINANCE_TESTNET  | Set to true if you would like to connect to the Binance Testnet API                          |              NO               |
+| SENDGRID_SECRET  | SendGrid API key for the bot to send you email notifications when buy orders are executed    |              NO               |
+| SENDGRID_FROM    | If using SendGrid notifications this is the sender email address                             |              NO               |
+| SENDGRID_TO      | If using SendGrid notifications this is the recipient email address                          |              NO               |
+| TELEGRAM_TOKEN   | If using Telegram notifications this value is the BotFather's generated token                |              NO               |
+| TELEGRAM_CHAT_ID | If using Telegram notifications this value is the chat identifier to which send notification |              NO               |
+| MONGODB_URI      | If using MongoDb Atlas this is the connection string                                         |              NO               |
+| TRADES           | This is the stringified version of the `trades.js` file content                              | ONLY IF NOT USING `trades.js` |
 
 ## Running the bot
 
@@ -128,6 +130,7 @@ If you found this project helpful and would like to support me, you can donate t
 ## TODO list
 
 - [ ] Write tests
+- [ ] Standardised messaging across all notification/storage platforms, email, terminal/cli, Mongo, Telegram etc...
 
 ## Disclaimer
 
