@@ -128,7 +128,6 @@ If you found this project helpful and would like to support me, you can donate t
 - **USDT**: 0x804d2f31cc49a68011271b1d56884d0efa9e9ce9
 
 ## TODO list
-
 - [ ] Write tests
 - [ ] Standardised messaging across all notification/storage platforms, email, terminal/cli, Mongo, Telegram etc...
 
