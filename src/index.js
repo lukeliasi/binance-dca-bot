@@ -18,7 +18,7 @@ dotenv.config();
  * Simple HTTP server (so Heroku and other free SaaS will not bother on killing the app on free plans)
  * Can always use something like Kaffeine to keep it alive
  */
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
 const requestListener = function (req, res) {
 	res.writeHead(200);
 	res.end('Hello, Traders!');
@@ -30,9 +30,10 @@ server.listen(PORT);
  * Binance Integration
  */
 const TRADES = JSON.parse(process.env.TRADES || null) || trades || [];
-const BINANCE_KEY = process.env.BINANCE_KEY || null;
 const BINANCE_SECRET = process.env.BINANCE_SECRET || null;
-const binance = new BinanceAPI(BINANCE_KEY, BINANCE_SECRET);
+const BINANCE_KEY = process.env.BINANCE_KEY || null;
+const BINANCE_TESTNET = process.env.BINANCE_TESTNET === "true" ? true : false;
+const binance = new BinanceAPI(BINANCE_TESTNET, BINANCE_KEY, BINANCE_SECRET);
 
 /**
  * Telegram Integration
@@ -118,7 +119,7 @@ function checkForParameters() {
 		return false;
 	}
 
-	if (!TRADES || TRADES.length == 0) {
+	if (!TRADES || TRADES.length === 0) {
 		console.log(colors.red("No trades to perform, please update environment variables, .env file or trades.js file."));
 		return false;
 	}

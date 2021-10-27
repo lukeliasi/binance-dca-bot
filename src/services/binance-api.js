@@ -27,6 +27,31 @@ export class BinanceAPI {
 			.digest("hex");
 	}
 
+	async accountInfo() {
+		let params = {
+			recvWindow: 30000,
+			timestamp: Date.now(),
+		}
+
+		params.signature = this.createSignature(params);
+
+		const url = `${this.apiUrl}/api/v3/account?${querystring.stringify(params)}`;
+
+		try {
+			const response = await fetch(url, {
+				method: "GET",
+				headers: {
+					"X-MBX-APIKEY": this.key,
+					"Content-Type": "application/json"
+				}
+			});
+
+			return await response.json();
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
 	/**
 	 * Get account information
 	 * @returns {object} account information

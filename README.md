@@ -53,7 +53,7 @@ npm install
 ## Configure the bot
 
 All the required settings needs to be set using Environment Variables or `.env` file.
-Rename the `example.env` to `.env` file for a quick bootstrap.
+Rename the `.env.example` to `.env` file for a quick bootstrap.
 
 **NB:** `TRADES` environment variable have priority over the `trades.js` file values.
 
@@ -127,6 +127,9 @@ If you found this project helpful and would like to support me, you can donate t
 
 ## TODO list
 
+- [ ] Write tests
+
+## TODO list
 - [ ] Write tests
 
 ## Disclaimer
