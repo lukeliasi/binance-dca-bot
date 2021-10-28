@@ -52,14 +52,15 @@ npm install
 
 ## Configure the bot
 
-All the required settings needs to be set using Environment Variables or `.env` file.
+All the required settings needs to be set using Environment Variables or `.env` file. The trades you want to make can be configured in a `trades.js` file in the root or with environment variables.
+
 Rename the `env.example` to `.env` file for a quick bootstrap.
 
 ### Trades.js file
 
 Configure the `trades.js` file in the root, you can uncomment and edit the provided example file.
 
-**NB:** you may also define trades as an Environment Variables (see below)
+**NB:** you may also define trades as an Environment Variables (see section below).
 
 #### Trades object
 
@@ -128,6 +129,7 @@ If you found this project helpful and would like to support me, you can donate t
 - **USDT**: 0x804d2f31cc49a68011271b1d56884d0efa9e9ce9
 
 ## TODO list
+- [ ] Add features to README such as Telegram and MongoDB integrations
 - [ ] Write tests
 - [ ] Standardised messaging across all notification/storage platforms, email, terminal/cli, Mongo, Telegram etc...
 
