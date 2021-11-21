@@ -34,6 +34,9 @@ All other settings (API/Telegram/SendGrid/MongoDB/...) needs to be set using Env
     - [Create the bot](#create-the-bot)
     - [Start the bot](#start-the-bot)
     - [Get the chat id](#get-the-chat-id)
+  - [MongoDB integration](#mongodb-integration)
+    - [Create the database](#create-the-database)
+    - [Get connection string](#get-connection-string)
   - [Deployment](#deployment)
   - [Automating fiat deposits to Binance](#automating-fiat-deposits-to-binance)
   - [Donations](#donations)
@@ -132,9 +135,9 @@ First of all you need to create your personal Telegram Bot, we do not provide an
 Telegram has an easy way to create bots, it really just takes a couple of steps.
 
 1. Open `Telegram` and search for `BotFather` chat
-2. Eventually start the bot and run the `/newbot` command.
-3. Enter the `name` you want to use for the bot.
-4. Enter the `username` for the bot (it must ends with `bot`).
+2. Eventually start the bot and run the `/newbot` command
+3. Enter the `name` you want to use for the bot
+4. Enter the `username` for the bot (it must ends with `bot`)
 5. Done!
 
 ![Telegram Bot Setup](/images/telegram-bot.png)
@@ -193,6 +196,38 @@ That's all we needs to have Telegram notifications when the bot starts or perfor
 
 **NB:** if you're adding the bot to a `Group Chat` the process is a bit different but there are easy-to-use bots that helps you retrieve the chat id such as [@RawDataBot](https://t.me/RawDataBot), remember to kick it after you get what you need (just in case).
 
+## MongoDB integration
+
+All the trades can also be saved on a MongoDB collection for further analysis.
+For ease of use we strongly suggest the free tier of Mongo Atlas, more than enough for this bot.
+
+![MongoDB Atlas](images/mongodb-atlas.png)
+
+### Create the database
+
+To get things ready you need to follow these steps:
+
+1. Create an account (or login) to [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+2. If you're new to Atlas you'll need to create an `Organization`
+3. Create a new project
+4. Add a Free (`Shared / M0 Sandbox`) database to it. Here you can select the provider and server location, this may vary depending on you actual location. Give it a recognizable name, just for better understanding.
+5. Select to use the username and password authentication method (do not use same username and password as the main account)
+6. Select the `Cloud Environment` connection.
+7. If you bot host is providing a public IP address then fill it in the form, otherwise you need to give access to anyone using the `0.0.0.0/0` IP ranges
+
+### Get connection string
+
+You need to connect the bot with the database using a connection string.
+To retrieve that follow these steps:
+
+1. In the `databases` screen, click on `Connect` on the desired cluster
+2. Select `Connect your application`
+3. Copy the connection string and use it in the `MONGODB_URI` environment variable.
+
+![MondoDb Connection String](/images/mongodb-connection.png)
+
+**NB:** you need to replace `<password>` with your actual database account password (created on step 5).
+
 ## Deployment
 
 Consider running the bot in the cloud, so you do not need to run the bot constantly on your machine.
@@ -230,7 +265,7 @@ If you found this project helpful and would like to support me, you can donate t
 
 - [ ] Add features to README:
   - [x]  Telegram integration
-  - [ ]  MongoDB integration
+  - [x]  MongoDB integration
   - [ ]  SendGrid integration
 - [ ] Write tests
 - [ ] Standardised messaging across all notification/storage platforms, email, terminal/cli, Mongo, Telegram etc...
