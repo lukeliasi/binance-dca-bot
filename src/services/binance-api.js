@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import crypto from "crypto";
-import querystring from "querystring";
 
 export class BinanceAPI {
 	/**
@@ -26,7 +25,7 @@ export class BinanceAPI {
 	createSignature(params) {
 		return crypto
 			.createHmac("sha256", this.secret)
-			.update(querystring.stringify(params))
+			.update(new URLSearchParams(params).toString())
 			.digest("hex");
 	}
 
@@ -42,7 +41,7 @@ export class BinanceAPI {
 
 		params.signature = this.createSignature(params);
 
-		const url = `${this.apiUrl}/api/v3/account?${querystring.stringify(params)}`;
+		const url = `${this.apiUrl}/api/v3/account?${new URLSearchParams(params).toString()}`;
 
 		try {
 			const response = await fetch(url, {
@@ -79,7 +78,7 @@ export class BinanceAPI {
 
 		params.signature = this.createSignature(params);
 
-		const url = `${this.apiUrl}/api/v3/order?${querystring.stringify(params)}`;
+		const url = `${this.apiUrl}/api/v3/order?${new URLSearchParams(params).toString()}`;
 
 		try {
 			const response = await fetch(url, {
