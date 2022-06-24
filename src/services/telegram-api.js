@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import querystring from "querystring";
 
 export class TelegramAPI {
 	/**
@@ -27,7 +26,7 @@ export class TelegramAPI {
 			parse_mode: "markdown"
 		}
 
-		const url = `${this.apiUrl}/bot${this.token}/sendMessage?${querystring.stringify(params)}`;
+		const url = `${this.apiUrl}/bot${this.token}/sendMessage?${new URLSearchParams(params).toString()}`;
 
 		try {
 			const response = await fetch(url, {
